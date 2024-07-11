@@ -1,19 +1,23 @@
-import { Image, StyleSheet, Platform } from "react-native";
+import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { Button } from "@react-native-material/core";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 
 export default function HomeScreen() {
   return (
-    <ThemedView style={styles.titleContainer}>
-      <ThemedText type="title">Hello World!</ThemedText>
-    </ThemedView>
+    <View style={styles.container}>
+      <Text>Hello World!</Text>
+      <StatusBar barStyle="default" />
+      <Button title="Button" onPress={() => alert("Hi!")} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
     alignItems: "center",
-    height: "100%",
+    justifyContent: "center",
   },
 });
