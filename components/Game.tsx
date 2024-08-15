@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 50,
     alignContent: "space-around",
+    cursor: "pointer",
   },
 });
 
