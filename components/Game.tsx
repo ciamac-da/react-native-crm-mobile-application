@@ -21,8 +21,11 @@ class Game extends React.Component<GameProps> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.headline}>Sum Game</Text>
-        <Text style={styles.target}>{this.target}</Text>
+        <Text style={styles.headline}>Cia's Sum Game</Text>
+        <Text style={styles.target}>
+          Sum of numbers should be: &nbsp;
+          <span style={styles.targetNumber}>{this.target}</span>
+        </Text>
         <View style={styles.randomNumberContainer}>
           {this.randomNumbers.map((randomNumber, index) => (
             <Text style={styles.randomNumber} key={index}>
@@ -56,6 +59,9 @@ const styles = StyleSheet.create({
     backgroundColor: "gold",
     width: 300,
     textAlign: "center",
+  },
+  targetNumber: {
+    fontWeight: 700,
   },
   randomNumberContainer: {
     flex: 1,
