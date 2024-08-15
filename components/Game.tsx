@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    padding: 32,
+    padding: 16,
     backgroundColor: "#0073AA",
   },
   headline: {
@@ -67,11 +67,14 @@ const styles = StyleSheet.create({
     padding: 32,
     fontSize: 20,
     width: 100,
+    height: 100,
     marginHorizontal: 15,
     marginVertical: 25,
     alignSelf: "center",
     textAlign: "center",
     backgroundColor: "white",
+    borderRadius: 50,
+    alignContent: "space-around",
   },
 });
 
