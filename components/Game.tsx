@@ -2,7 +2,8 @@ import { StyleSheet, Text, View } from "react-native";
 export default function Game() {
   return (
     <View style={styles.container}>
-      <Text>Hiii</Text>
+      <Text style={styles.headline}>Sum Game </Text>
+      <Text style={styles.target}>42</Text>
     </View>
   );
 }
@@ -10,8 +11,20 @@ export default function Game() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    padding: 32,
+    backgroundColor: "#0073AA",
+  },
+  headline: {
+    padding: 16,
+    fontSize: 32,
+    fontWeight: 700,
+  },
+  target: {
+    fontSize: 32,
+    padding: 16,
+    borderRadius: 5,
+    color: "black",
+    backgroundColor: "gold",
   },
 });
