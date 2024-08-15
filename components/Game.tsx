@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import PropTypes from "prop-types";
 
-// Define the type for the component props
 interface GameProps {
   randomNumberCount: number;
 }
@@ -24,9 +23,13 @@ class Game extends React.Component<GameProps> {
       <View style={styles.container}>
         <Text style={styles.headline}>Sum Game</Text>
         <Text style={styles.target}>{this.target}</Text>
-        {this.randomNumbers.map((randomNumber, index) => (
-          <Text key={index}>{randomNumber}</Text>
-        ))}
+        <View style={styles.randomNumberContainer}>
+          {this.randomNumbers.map((randomNumber, index) => (
+            <Text style={styles.randomNumber} key={index}>
+              {randomNumber}
+            </Text>
+          ))}
+        </View>
       </View>
     );
   }
@@ -40,9 +43,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#0073AA",
   },
   headline: {
+    color: "white",
     padding: 16,
     fontSize: 32,
-    fontWeight: "700", // Corrected fontWeight value
+    fontWeight: 700,
   },
   target: {
     fontSize: 32,
@@ -52,6 +56,22 @@ const styles = StyleSheet.create({
     backgroundColor: "gold",
     width: 300,
     textAlign: "center",
+  },
+  randomNumberContainer: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+  },
+  randomNumber: {
+    padding: 32,
+    fontSize: 20,
+    width: 100,
+    marginHorizontal: 15,
+    marginVertical: 25,
+    alignSelf: "center",
+    textAlign: "center",
+    backgroundColor: "white",
   },
 });
 
