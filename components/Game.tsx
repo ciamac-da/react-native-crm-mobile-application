@@ -1,11 +1,15 @@
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-export default function Game() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.headline}>Sum Game </Text>
-      <Text style={styles.target}>42</Text>
-    </View>
-  );
+class Game extends React.Component {
+  target = 10 + Math.floor(40 * Math.random());
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.headline}>Sum Game </Text>
+        <Text style={styles.target}>{this.target}</Text>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -28,3 +32,5 @@ const styles = StyleSheet.create({
     backgroundColor: "gold",
   },
 });
+
+export default Game;
