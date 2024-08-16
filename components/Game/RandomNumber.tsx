@@ -1,20 +1,48 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ViewStyle,
+  TextStyle,
+} from "react-native";
 import PropTypes from "prop-types";
 
 interface RandomNumberProps {
   number: number;
 }
 
-class RandomNumber extends React.Component<RandomNumberProps> {
+interface RandomNumberState {
+  isPressed: boolean;
+}
+
+class RandomNumber extends React.Component<
+  RandomNumberProps,
+  RandomNumberState
+> {
   static propTypes = {
     number: PropTypes.number.isRequired,
   };
+
+  state = {
+    isPressed: false,
+  };
+
+  handlePress = () => {
+    this.setState({ isPressed: !this.state.isPressed });
+    console.log(this.props.number);
+  };
+
   render() {
+    const { isPressed } = this.state;
+    const randomNumberStyle: TextStyle = isPressed
+      ? styles.pressedNumber
+      : styles.random;
+
     return (
-      <View>
-        <Text style={styles.random}>{this.props.number}</Text>
-      </View>
+      <TouchableOpacity onPress={this.handlePress}>
+        <Text style={randomNumberStyle}>{this.props.number}</Text>
+      </TouchableOpacity>
     );
   }
 }
@@ -22,7 +50,16 @@ class RandomNumber extends React.Component<RandomNumberProps> {
 const styles = StyleSheet.create({
   random: {
     alignItems: "center",
-    backgroundColor: "#0073AA",
+    fontSize: 24,
+    color: "black",
+    backgroundColor: "white",
+    borderRadius: 8,
+  },
+  pressedNumber: {
+    alignItems: "center",
+    fontSize: 24,
+    color: "#0073AA",
+    fontWeight: 700,
   },
 });
 
