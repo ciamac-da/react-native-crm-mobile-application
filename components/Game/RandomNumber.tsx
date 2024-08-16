@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  ViewStyle,
-  TextStyle,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, TextStyle } from "react-native";
 import PropTypes from "prop-types";
 
 interface RandomNumberProps {
@@ -57,7 +51,7 @@ const styles = StyleSheet.create({
   },
   pressedNumber: {
     alignItems: "center",
-    fontSize: 24,
+    fontSize: 32,
     color: "#0073AA",
     fontWeight: 700,
   },
