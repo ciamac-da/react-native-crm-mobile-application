@@ -36,7 +36,7 @@ class Game extends React.Component<GameProps, GameState> {
     }));
   };
 
-  gameStatus = () => {
+  gameStatus = (): "PLAYING" | "WON" | "LOST" => {
     const sumSelected = this.state.selectedIds.reduce((acc, curr) => {
       return acc + this.randomNumbers[curr];
     }, 0);
@@ -46,18 +46,20 @@ class Game extends React.Component<GameProps, GameState> {
     if (sumSelected === this.target) {
       return "WON";
     }
-    if (sumSelected > this.target) {
-      return "LOST";
-    }
+    return "LOST";
   };
+
   render() {
     const gameStatus = this.gameStatus();
+    const statusStyle = styles[`GAME_STATUS_${gameStatus}`];
     return (
       <View style={styles.container}>
-        <Text style={styles.headline}>Cia's Sum Game</Text>
+        <Text style={[styles.targetNumber, statusStyle]}>{gameStatus}</Text>
         <Text style={styles.target}>
           Sum of numbers should be: &nbsp;
-          <Text style={styles.targetNumber}>{this.target}</Text>
+          <Text style={[styles.targetNumber, styles[`STATUS_${gameStatus}`]]}>
+            {this.target}
+          </Text>
         </Text>
         <View style={styles.randomNumberContainer}>
           {this.randomNumbers.map((randomNumber, index) => (
@@ -71,7 +73,6 @@ class Game extends React.Component<GameProps, GameState> {
             </Text>
           ))}
         </View>
-        <Text>{gameStatus}</Text>
       </View>
     );
   }
@@ -81,26 +82,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    padding: 16,
+    padding: 8,
     backgroundColor: "#0073AA",
-  },
-  headline: {
-    color: "white",
-    padding: 16,
-    fontSize: 32,
-    fontWeight: 700,
+    overflow: "scroll",
   },
   target: {
-    fontSize: 32,
+    fontSize: 16,
     padding: 16,
     borderRadius: 5,
-    color: "black",
-    backgroundColor: "gold",
+    color: "white",
+    fontWeight: 700,
     width: 300,
     textAlign: "center",
   },
   targetNumber: {
     fontWeight: 700,
+    fontSize: 56,
   },
   randomNumberContainer: {
     flex: 1,
@@ -111,8 +108,8 @@ const styles = StyleSheet.create({
   randomNumber: {
     padding: 32,
     fontSize: 20,
-    width: 100,
-    height: 100,
+    width: 90,
+    height: 90,
     marginHorizontal: 15,
     marginVertical: 25,
     alignSelf: "center",
@@ -121,6 +118,48 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     alignContent: "space-around",
     cursor: "pointer",
+  },
+  STATUS_PLAYING: {
+    color: "gold",
+  },
+  STATUS_WON: {
+    color: "green",
+  },
+  STATUS_LOST: {
+    color: "red",
+  },
+  GAME_STATUS_PLAYING: {
+    width: "100%",
+    margin: "auto",
+    textAlign: "center",
+    backgroundColor: "gold",
+    color: "white",
+    padding: 30,
+    borderRadius: 5,
+    fontSize: 32,
+    fontWeight: 700,
+  },
+  GAME_STATUS_WON: {
+    width: "100%",
+    margin: "auto",
+    textAlign: "center",
+    backgroundColor: "green",
+    color: "white",
+    padding: 30,
+    borderRadius: 5,
+    fontSize: 32,
+    fontWeight: 700,
+  },
+  GAME_STATUS_LOST: {
+    width: "100%",
+    margin: "auto",
+    textAlign: "center",
+    backgroundColor: "red",
+    color: "white",
+    padding: 30,
+    borderRadius: 5,
+    fontSize: 32,
+    fontWeight: 700,
   },
 });
 
