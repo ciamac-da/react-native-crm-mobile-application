@@ -7,9 +7,16 @@ interface GameProps {
   randomNumberCount: number;
 }
 
-class Game extends React.Component<GameProps> {
+interface GameState {
+  selectedNumbers: number[];
+}
+
+class Game extends React.Component<GameProps, GameState> {
   static propTypes = {
     randomNumberCount: PropTypes.number.isRequired,
+  };
+  state: GameState = {
+    selectedNumbers: [],
   };
   randomNumbers = Array.from({
     length: this.props.randomNumberCount,
@@ -19,18 +26,33 @@ class Game extends React.Component<GameProps> {
     .slice(0, this.props.randomNumberCount - 2)
     .reduce((acc, curr) => acc + curr, 0);
 
+  isNumberSlected = (numberIndex: number) => {
+    return this.state.selectedNumbers.indexOf(numberIndex) >= 0;
+  };
+
+  selectNumber = (numberIndex: number) => {
+    this.setState((prevState) => ({
+      selectedNumbers: [...prevState.selectedNumbers, numberIndex],
+    }));
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.headline}>Cia's Sum Game</Text>
         <Text style={styles.target}>
           Sum of numbers should be: &nbsp;
-          <span style={styles.targetNumber}>{this.target}</span>
+          <Text style={styles.targetNumber}>{this.target}</Text>
         </Text>
         <View style={styles.randomNumberContainer}>
           {this.randomNumbers.map((randomNumber, index) => (
             <Text style={styles.randomNumber} key={index}>
-              <RandomNumber key={index} number={randomNumber} />
+              <RandomNumber
+                number={randomNumber}
+                id={index}
+                isDisabled={this.isNumberSlected(index)}
+                onPress={() => this.selectNumber(index)}
+              />
             </Text>
           ))}
         </View>

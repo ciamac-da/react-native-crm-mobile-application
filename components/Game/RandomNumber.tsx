@@ -3,39 +3,34 @@ import { StyleSheet, Text, TouchableOpacity, TextStyle } from "react-native";
 import PropTypes from "prop-types";
 
 interface RandomNumberProps {
+  id: number;
   number: number;
+  isDisabled: boolean;
+  onPress: (id: number) => void;
 }
 
-interface RandomNumberState {
-  isPressed: boolean;
-}
-
-class RandomNumber extends React.Component<
-  RandomNumberProps,
-  RandomNumberState
-> {
+class RandomNumber extends React.Component<RandomNumberProps> {
   static propTypes = {
+    id: PropTypes.number.isRequired,
     number: PropTypes.number.isRequired,
-  };
-
-  state = {
-    isPressed: false,
+    isDisabled: PropTypes.bool.isRequired,
+    onPress: PropTypes.func.isRequired,
   };
 
   handlePress = () => {
-    this.setState({ isPressed: !this.state.isPressed });
-    console.log(this.props.number);
+    if (!this.props.isDisabled) {
+      this.props.onPress(this.props.id);
+    }
   };
-
   render() {
-    const { isPressed } = this.state;
-    const randomNumberStyle: TextStyle = isPressed
+    const { number, isDisabled } = this.props;
+    const randomNumberStyle: TextStyle = isDisabled
       ? styles.pressedNumber
       : styles.random;
 
     return (
-      <TouchableOpacity onPress={this.handlePress}>
-        <Text style={randomNumberStyle}>{this.props.number}</Text>
+      <TouchableOpacity onPress={this.handlePress} disabled={isDisabled}>
+        <Text style={randomNumberStyle}>{number}</Text>
       </TouchableOpacity>
     );
   }
@@ -54,6 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: "#0073AA",
     fontWeight: 700,
+    opacity: 0.5,
   },
 });
 
