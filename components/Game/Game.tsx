@@ -8,7 +8,7 @@ interface GameProps {
 }
 
 interface GameState {
-  selectedNumbers: number[];
+  selectedIds: number[];
 }
 
 class Game extends React.Component<GameProps, GameState> {
@@ -16,7 +16,7 @@ class Game extends React.Component<GameProps, GameState> {
     randomNumberCount: PropTypes.number.isRequired,
   };
   state: GameState = {
-    selectedNumbers: [],
+    selectedIds: [],
   };
   randomNumbers = Array.from({
     length: this.props.randomNumberCount,
@@ -27,16 +27,31 @@ class Game extends React.Component<GameProps, GameState> {
     .reduce((acc, curr) => acc + curr, 0);
 
   isNumberSlected = (numberIndex: number) => {
-    return this.state.selectedNumbers.indexOf(numberIndex) >= 0;
+    return this.state.selectedIds.indexOf(numberIndex) >= 0;
   };
 
   selectNumber = (numberIndex: number) => {
     this.setState((prevState) => ({
-      selectedNumbers: [...prevState.selectedNumbers, numberIndex],
+      selectedIds: [...prevState.selectedIds, numberIndex],
     }));
   };
 
+  gameStatus = () => {
+    const sumSelected = this.state.selectedIds.reduce((acc, curr) => {
+      return acc + this.randomNumbers[curr];
+    }, 0);
+    if (sumSelected < this.target) {
+      return "PLAYING";
+    }
+    if (sumSelected === this.target) {
+      return "WON";
+    }
+    if (sumSelected > this.target) {
+      return "LOST";
+    }
+  };
   render() {
+    const gameStatus = this.gameStatus();
     return (
       <View style={styles.container}>
         <Text style={styles.headline}>Cia's Sum Game</Text>
@@ -56,6 +71,7 @@ class Game extends React.Component<GameProps, GameState> {
             </Text>
           ))}
         </View>
+        <Text>{gameStatus}</Text>
       </View>
     );
   }
