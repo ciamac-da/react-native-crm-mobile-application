@@ -54,13 +54,13 @@ class Game extends React.Component<GameProps, GameState> {
     const statusStyle = styles[`GAME_STATUS_${gameStatus}`];
     return (
       <View style={styles.container}>
-        <Text style={[styles.targetNumber, statusStyle]}>{gameStatus}</Text>
         <Text style={styles.target}>
           Sum of numbers should be: &nbsp;
           <Text style={[styles.targetNumber, styles[`STATUS_${gameStatus}`]]}>
             {this.target}
           </Text>
         </Text>
+        <Text style={[statusStyle]}>Current status is: {gameStatus}</Text>
         <View style={styles.randomNumberContainer}>
           {this.randomNumbers.map((randomNumber, index) => (
             <Text style={styles.randomNumber} key={index}>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     overflow: "scroll",
   },
   target: {
-    fontSize: 16,
+    fontSize: 18,
     padding: 16,
     borderRadius: 5,
     color: "white",
@@ -108,8 +108,8 @@ const styles = StyleSheet.create({
   randomNumber: {
     padding: 32,
     fontSize: 20,
-    width: 90,
-    height: 90,
+    width: 85,
+    height: 85,
     marginHorizontal: 15,
     marginVertical: 25,
     alignSelf: "center",
@@ -121,12 +121,21 @@ const styles = StyleSheet.create({
   },
   STATUS_PLAYING: {
     color: "gold",
+    textShadowColor: "rgba(0, 0, 0, 0.75)",
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
   STATUS_WON: {
     color: "green",
+    textShadowColor: "rgba(0, 0, 0, 0.75)",
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
   STATUS_LOST: {
     color: "red",
+    textShadowColor: "rgba(0, 0, 0, 0.75)",
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
   GAME_STATUS_PLAYING: {
     width: "100%",
@@ -136,8 +145,11 @@ const styles = StyleSheet.create({
     color: "white",
     padding: 30,
     borderRadius: 5,
-    fontSize: 32,
+    fontSize: 16,
     fontWeight: 700,
+    textShadowColor: "rgba(0, 0, 0, 0.75)",
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
   GAME_STATUS_WON: {
     width: "100%",
@@ -147,7 +159,7 @@ const styles = StyleSheet.create({
     color: "white",
     padding: 30,
     borderRadius: 5,
-    fontSize: 32,
+    fontSize: 16,
     fontWeight: 700,
   },
   GAME_STATUS_LOST: {
@@ -158,7 +170,7 @@ const styles = StyleSheet.create({
     color: "white",
     padding: 30,
     borderRadius: 5,
-    fontSize: 32,
+    fontSize: 16,
     fontWeight: 700,
   },
 });

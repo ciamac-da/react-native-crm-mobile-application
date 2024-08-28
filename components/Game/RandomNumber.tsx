@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   pressedNumber: {
     alignItems: "center",
-    fontSize: 32,
+    fontSize: 26,
     color: "#0073AA",
     fontWeight: 700,
     opacity: 0.5,
